@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amrita Canteen Register</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .canteen-bg {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/3075/3075977.png');
+      background-size: 200px;
+      background-repeat: no-repeat;
+      background-position: top 30px right 30px;
+      opacity: 0.08;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .register-card {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.9);
+      transition: all 0.3s ease-in-out;
+      border-top: 4px solid #3b82f6;
+    }
+
+    .register-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1e40af, #1d4ed8);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body class="relative flex flex-col items-center justify-center">
+
+  <!-- Subtle Background -->
+  <div class="canteen-bg"></div>
+
+  <!-- Navbar Branding -->
+  <button
+    onclick="window.location.href='home.html'"
+    class="fixed top-6 left-8 text-3xl font-extrabold text-blue-700 hover:text-blue-900 transition-transform duration-300 hover:scale-105 z-50 tracking-wide">
+    Smart<span class="text-blue-500">Canteen</span>
+  </button>
+
+  <!-- Register Section -->
+  <div class="flex items-center justify-center min-h-screen w-full z-10 px-4">
+    <div class="w-full max-w-sm p-8 rounded-2xl shadow-xl register-card">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-extrabold text-gray-800 flex items-center justify-center gap-2">
+          🧾 Create an Account
+        </h2>
+        <p class="text-gray-500 text-sm mt-2">Join Amrita Canteen and start ordering smarter!</p>
+      </div>
+
+      <!-- Register Form -->
+      <form id="registerForm" class="space-y-4">
+        <input id="username" required placeholder="Username"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-blue-50 text-gray-700" />
+
+        <input id="email" required placeholder="Email"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-blue-50 text-gray-700" />
+
+        <input id="password" type="password" required placeholder="Password"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-blue-50 text-gray-700" />
+
+        <select id="role"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-blue-50 text-gray-700">
+          <option value="customer" selected>Customer</option>
+          <option value="staff">Staff</option>
+          <option value="admin">Admin</option>
+        </select>
+
+        <button
+          class="w-full p-3 btn-primary text-white rounded-lg font-semibold text-lg shadow-md hover:shadow-lg transition">
+          Register
+        </button>
+      </form>
+
+      <!-- Login Link -->
+      <p class="mt-4 text-sm text-center text-gray-600">
+        Already have an account?
+        <button id="goLogin" class="text-blue-600 hover:underline font-medium">Login</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-gray-500 text-sm mt-8">
+    © 2025 Amrita Canteen | Rohit | Tanay | Jiya | Neha 🍛
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    const API = 'http://localhost:5001';
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("registerForm");
+      const username = document.getElementById("username");
+      const email = document.getElementById("email");
+      const password = document.getElementById("password");
+      const role = document.getElementById("role");
+      const loginBtn = document.getElementById("goLogin");
+
+      if (loginBtn) {
+        loginBtn.addEventListener("click", () => {
+          window.location.href = "index.html";
+        });
+      }
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const data = {
+          username: username.value.trim(),
+          email: email.value.trim(),
+          password: password.value.trim(),
+          role: role.value
+        };
+
+        if (!data.username || !data.email || !data.password) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API}/api/auth/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          });
+
+          if (!res.ok) {
+            alert("Registration failed. Try again.");
+            return;
+          }
+
+          alert("✅ Registration successful! Please log in.");
+          window.location.href = "index.html";
+        } catch (err) {
+          console.error("Registration failed:", err);
+          alert("❌ Error during registration. Please try again.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

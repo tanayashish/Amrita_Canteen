@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amrita Canteen Login</title>
+
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    body {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    .canteen-bg {
+      background-image: url('https://cdn-icons-png.flaticon.com/512/3595/3595455.png');
+      background-size: 180px;
+      background-repeat: no-repeat;
+      background-position: top 30px right 30px;
+      opacity: 0.08;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .login-card {
+      backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.85);
+      transition: all 0.3s ease-in-out;
+      border-top: 4px solid #3b82f6;
+    }
+
+    .login-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #1e40af, #1d4ed8);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+
+<body class="relative flex flex-col items-center justify-center">
+
+  <!-- Subtle Background -->
+  <div class="canteen-bg"></div>
+
+  <!-- Navbar Branding -->
+  <button
+    onclick="window.location.href='home.html'"
+    class="fixed top-6 left-8 text-3xl font-extrabold text-blue-700 hover:text-blue-900 transition-transform duration-300 hover:scale-105 z-50 tracking-wide">
+    Amrita <span class="text-blue-500">Canteen</span>
+  </button>
+
+  <!-- Login Section -->
+  <div class="flex items-center justify-center min-h-screen w-full z-10 px-4">
+    <div class="w-full max-w-sm p-8 rounded-2xl shadow-xl login-card">
+      <div class="text-center mb-6">
+        <h2 class="text-3xl font-extrabold text-gray-800 flex items-center justify-center gap-2">
+          🍽️ Amrita Canteen Login
+        </h2>
+        <p class="text-gray-500 text-sm mt-2">Order, Eat & Enjoy!</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="space-y-4">
+        <input id="username" required placeholder="Username"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-blue-50 text-gray-700" />
+
+        <input id="password" type="password" required placeholder="Password"
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none bg-blue-50 text-gray-700" />
+
+        <button
+          class="w-full p-3 btn-primary text-white rounded-lg font-semibold text-lg shadow-md hover:shadow-lg transition">
+          Login
+        </button>
+      </form>
+
+      <!-- Register Link -->
+      <p class="mt-4 text-sm text-center text-gray-600">
+        No account?
+        <button id="goReg" class="text-blue-600 hover:underline font-medium">Register</button>
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 text-gray-500 text-sm mt-8">
+    © 2025 Amrita Canteen | Rohit | Tanay | Jiya | Neha 🍛
+  </footer>
+
+  <!-- Existing JS Functionalities -->
+  <script src="../src/app.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const regBtn = document.getElementById("goReg");
+      if (regBtn) {
+        regBtn.addEventListener("click", () => {
+          window.location.href = "register.html";
+        });
+      }
+    });
+  </script>
+
+  <script>
+    const API = 'http://localhost:5001';
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("loginForm");
+      const usernameInput = document.getElementById("username");
+      const passwordInput = document.getElementById("password");
+
+      if (!form) return;
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const username = usernameInput.value.trim();
+        const password = passwordInput.value.trim();
+
+        if (!username || !password) {
+          alert("Please enter both username and password.");
+          return;
+        }
+
+        try {
+          const resp = await fetch(`${API}/api/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password })
+          });
+
+          if (!resp.ok) {
+            alert("Invalid username or password!");
+            return;
+          }
+
+          const data = await resp.json();
+          localStorage.setItem("user", JSON.stringify({ username: data.username, role: data.role, token: data.token }));
+
+          // Redirect based on role
+          if (data.role === "staff" || data.role === "admin") {
+            window.location.href = "admin.html";
+          } else {
+            window.location.href = "dashboard.html";
+          }
+        } catch (err) {
+          console.error("Login failed:", err);
+          alert("Error logging in. Please try again.");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

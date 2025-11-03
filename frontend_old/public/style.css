@@ -1,0 +1,532 @@
+/* ======== FIXED SMARTAPP NAVBAR ======== */
+.app-nav {
+  width: 100%;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.app-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.8rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Left: Logo */
+.nav-left h1 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #2563eb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-left h1:hover {
+  color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+/* Center: Welcome */
+.nav-center {
+  flex: 1;
+  text-align: center;
+}
+
+.nav-center span {
+  font-weight: 600;
+  color: #374151;
+  font-size: 1.1rem;
+}
+
+/* Right: Logout */
+.nav-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-right button {
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-right button:hover {
+  background: #b91c1c;
+  transform: translateY(-2px);
+}
+
+/* Responsive: hide center text on small screens */
+@media (max-width: 640px) {
+  .nav-center {
+    display: none;
+  }
+}
+
+/* === Floating Cart and Sidebar === */
+.floating-cart {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(37, 99, 235, 0.95);
+  backdrop-filter: blur(8px);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  font-size: 28px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+.floating-cart:hover {
+  background: rgba(29, 78, 216, 1);
+  transform: scale(1.08);
+}
+
+.badge {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: #ef4444;
+  color: white;
+  border-radius: 50%;
+  font-size: 13px;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* === Cart Sidebar === */
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 370px;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+  transition: right 0.4s ease-in-out;
+  z-index: 1100;
+  padding: 24px;
+  overflow-y: auto;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+.cart-sidebar.open {
+  right: 0;
+}
+
+.cart-sidebar h2 {
+  font-weight: 700;
+  color: #1e3a8a;
+  margin-bottom: 16px;
+}
+
+/* Overlay */
+.cart-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1099;
+}
+.cart-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === Cart Items === */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  background: #f9fafb;
+  padding: 10px;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.cart-item:hover {
+  transform: scale(1.01);
+  background: #f3f4f6;
+}
+
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cart-item div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.qtyBtn,
+.removeBtn {
+  border: none;
+  background: #2563eb;
+  color: white;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  margin: 0 2px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+.qtyBtn:hover {
+  background: #1d4ed8;
+}
+.removeBtn {
+  background: #dc2626;
+}
+.removeBtn:hover {
+  background: #b91c1c;
+}
+
+.cart-total {
+  text-align: right;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: #111827;
+  margin-top: 16px;
+}
+/* ===== My Orders Floating Button (above Cart) ===== */
+.floating-orders {
+  position: fixed;
+  bottom: 100px; /* above the cart button (cart is bottom:24px); tune if needed */
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #fff;
+  color: #2563eb;
+  border: 2px solid rgba(37,99,235,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  cursor: pointer;
+  font-size: 22px;
+  z-index: 1201;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.floating-orders:hover { transform: scale(1.05); background:#f8fafc; }
+
+/* Orders sidebar (slide from right, similar to cart) */
+.orders-sidebar {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 420px;
+  height: 100vh;
+  background: rgba(255,255,255,0.98);
+  backdrop-filter: blur(8px);
+  box-shadow: -6px 0 18px rgba(0,0,0,0.12);
+  transition: right 0.35s ease-in-out;
+  z-index: 1110;
+  padding: 22px;
+  overflow-y: auto;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+.orders-sidebar.open { right: 0; }
+
+#myOrdersContainer .order-card {
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #edf2f7;
+}
+#myOrdersContainer .order-card p { margin: 6px 0; }
+#myOrdersContainer .order-time { color: #6b7280; font-size: 12px; }
+
+/* ensure overlay covers behind both sidebars */
+.cart-overlay.active { display:block; opacity:1; visibility:visible; }
+/* ========== Analytics Modal Styles ========== */
+
+/* overlay (invisible by default) */
+.analytics-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .22s ease, visibility .22s ease;
+  z-index: 1300;
+}
+
+/* central modal */
+.analytics-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 92%;
+  max-width: 1200px;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(15,23,42,0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+  z-index: 1310;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* inner scrollable area */
+.analytics-modal-inner {
+  padding: 20px 26px;
+  overflow: auto;
+}
+
+/* open state */
+.analytics-overlay.active { opacity: 1; visibility: visible; }
+.analytics-modal.open { opacity: 1; visibility: visible; transform: translate(-50%, -50%) scale(1); }
+
+/* cards inside modal - set fixed chart heights */
+.analytics-modal .card {
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.04);
+  height: 320px;
+
+}
+/* ===== Menu Manager Button ===== */
+.floating-menu {
+  position: fixed;
+  bottom: 180px; /* just above analytics */
+  right: 28px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: #fff;
+  font-size: 22px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1301;
+}
+.floating-menu:hover {
+  background: #1e3a8a;
+  transform: scale(1.05);
+}
+
+/* ===== Menu Modal Styles ===== */
+.menu-modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 92%;
+  max-width: 1100px;
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(15, 23, 42, 0.2);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .18s ease, transform .18s ease, visibility .18s;
+  z-index: 1310;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-modal.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.menu-modal-inner {
+  padding: 20px 26px;
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+.menu-card {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s ease;
+}
+.menu-card:hover {
+  transform: translateY(-3px);
+  background: #f1f5f9;
+}
+.menu-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.menu-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1e3a8a;
+}
+.menu-card p {
+  color: #4b5563;
+}
+.toggle-switch {
+  margin-left: auto;
+}
+
+/* smaller screens */
+@media (max-width: 768px) {
+  .analytics-modal .card { height: 220px; }
+  .analytics-modal { width: 96%; max-width: 96%; }
+}
+
+#searchInput {
+  background-color: #fff;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+#searchInput:focus {
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.3);
+  transform: scale(1.02);
+}
+
+
+/* small polish: refresh/close button spacing inside header */
+.analytics-modal header button { min-width: 80px; }
+
+/* ensure existing navigation styles remain unchanged */
+
+/* ===== Admin Analytics Dashboard Styles ===== */
+#analyticsModal {
+  background: #f9fafb;
+  border-radius: 16px;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+#analyticsContent {
+  font-family: 'Poppins', sans-serif;
+}
+
+#analyticsContent h2 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+#analyticsContent h3 {
+  font-weight: 600;
+}
+
+#analyticsContent .bg-white {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#analyticsContent .bg-white:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+#analyticsContent canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Scroll behavior for long modals */
+#analyticsModal::-webkit-scrollbar {
+  width: 8px;
+}
+#analyticsModal::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+.analytics-modal-inner {
+  background: #f9fafb;
+  border-radius: 16px;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.analytics-modal-inner::-webkit-scrollbar {
+  width: 8px;
+}
+.analytics-modal-inner::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+/* === Fix Chart Auto-Expanding in Analytics Modal === */
+#analyticsModal canvas {
+  display: block;
+  width: 100% !important;
+  max-width: 100%;
+  height: 220px !important;  /* fixed consistent height for all charts */
+  max-height: 300px;
+  margin: 0 auto;
+}
+
+#analyticsModal .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  min-height: 280px;
+}
+
+#addItemModal { 
+  opacity: 0; 
+  visibility: hidden; 
+  transform: translate(-50%, -50%) scale(0.95);
+  transition: all 0.25s ease;
+}
+#addItemModal.open { 
+  opacity: 1; 
+  visibility: visible; 
+  transform: translate(-50%, -50%) scale(1);
+}
+#addItemOverlay.active { 
+  opacity: 1; 
+  visibility: visible;
+}

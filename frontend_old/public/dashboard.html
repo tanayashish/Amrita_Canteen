@@ -1,0 +1,113 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> Amrita App Dashboard</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+  
+<body>
+  <!-- Navbar -->
+  <nav class="app-nav">
+    <div class="app-nav-inner">
+      <div class="nav-left">
+        <h1 id="smartAppBtn"> Amrita App</h1>
+      </div>
+      <div class="nav-center">
+        <span id="welcomeText">Welcome, Customer!</span>
+      </div>
+      <div class="nav-right">
+        <button id="logoutBtn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+  <!-- My Orders -->
+<div class="p-6 max-w-6xl mx-auto">
+  <h2 class="text-xl font-semibold mb-2">My Orders</h2>
+  <div id="myOrdersList" class="mb-4"></div>
+</div>
+
+<!-- 🔍 Search Bar -->
+<div class="w-full flex justify-center mt-6">
+  <input 
+    id="searchInput"
+    type="text"
+    placeholder="🔍 Search for food (e.g., dosa, tea, thali)..."
+    class="w-3/4 md:w-1/2 p-3 border border-gray-300 rounded-lg shadow-sm 
+           focus:ring-2 focus:ring-blue-500 focus:outline-none transition"
+  />
+</div>
+
+
+  <!-- Filter Buttons -->
+  <div class="flex justify-center gap-4 mt-6 filter-bar">
+    <button id="allMenuBtn" class="px-4 py-2 bg-blue-600 text-white rounded-lg">All Menu</button>
+    <button id="specialBtn" class="px-4 py-2 bg-yellow-400 text-black rounded-lg">Today's Special</button>
+    <button id="comboBtn" class="px-4 py-2 bg-green-600 text-white rounded-lg">Combo Offers</button>
+  </div>
+
+  <!-- Menu Grid -->
+  <div class="p-6 max-w-6xl mx-auto">
+    <div id="menuGrid" class="grid gap-6 grid-cols-1 md:grid-cols-3 mt-6"></div>
+  </div>
+
+  <footer>
+    © 2025  Amrita App | Rohit | Tanay | Jiya | Neha 🍛
+  </footer>
+
+<!-- Floating Orders Button (above cart) -->
+<button id="ordersButton" class="floating-orders" title="My Orders">
+  📋
+</button>
+
+<!-- Floating Cart Button -->
+<button id="cartButton" class="floating-cart" title="Cart">
+  🛒
+  <span id="cartCount" class="badge">0</span>
+</button>
+
+<!-- Orders Sidebar -->
+<div id="ordersSidebar" class="orders-sidebar" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+    <h2 class="text-2xl font-semibold">My Orders</h2>
+    <button id="closeOrders" class="nav-logout" style="padding:6px 10px;border-radius:8px;background:#ef4444;">Close</button>
+  </div>
+  <div id="myOrdersContainer">
+    <!-- Orders will be rendered here by dashboard.js -->
+    <p class="text-gray-600">Loading your orders…</p>
+  </div>
+</div>
+
+<!-- Cart Sidebar (unchanged) -->
+<div id="cartSidebar" class="cart-sidebar">
+  <h2 class="text-2xl font-semibold mb-4">Your Cart</h2>
+  <div id="cartItems"></div>
+
+  <div class="mt-4">
+    <label for="preference" class="block text-gray-700 font-medium mb-2">Add your food preference:</label>
+    <input
+      id="preference"
+      type="text"
+      placeholder="e.g., less spicy, no sugar, extra cheese..."
+      class="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:outline-none"
+    />
+  </div>
+
+  <div class="cart-total mt-4 text-lg">Total: ₹<span id="cartTotal">0</span></div>
+  <button id="placeOrder" class="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Place Order</button>
+</div>
+
+
+
+
+<!-- Overlay (shared by both sidebars) -->
+<div id="cartOverlay" class="cart-overlay"></div>
+
+
+  <script src="../src/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+_id,name,price,available,image
+item1,Chicken Biryani,120,true,https://images.unsplash.com/photo-1600891964599-f61ba0e24092
+item2,Veg Noodles,80,true,https://images.unsplash.com/photo-1604908177522-6d2956e4c54b
+item3,Paneer Butter Masala,100,true,https://images.unsplash.com/photos/a-table-topped-with-different-types-of-food-Y2tNKV30Bfw
+item4,Dal Makhani,70,true,https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg
+item5,Dosa,50,true,https://images.unsplash.com/photo-1590080879964-06b9e6b1c3c3
+item6,Coffee,30,true,https://images.unsplash.com/photo-1509042239860-f550ce710b93
