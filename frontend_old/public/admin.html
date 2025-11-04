@@ -20,35 +20,37 @@
     }
     
     .order-card {
-      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      background: white;
       border: 1px solid #e5e7eb;
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 16px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
       transition: all 0.3s ease;
     }
     
     .order-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-color: #d1d5db;
     }
     
     .order-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     
     .order-id {
       font-size: 0.875rem;
       font-weight: 600;
       color: #6366f1;
-      background: #eef2ff;
-      padding: 4px 12px;
-      border-radius: 8px;
+      background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+      padding: 6px 14px;
+      border-radius: 10px;
       display: inline-block;
+      border: 1px solid #c7d2fe;
     }
     
     .order-info {
@@ -56,23 +58,27 @@
     }
     
     .order-detail {
-      margin: 8px 0;
+      margin: 10px 0;
       font-size: 0.95rem;
-      color: #374151;
+      color: #4b5563;
+      line-height: 1.6;
     }
     
     .order-detail strong {
       color: #1f2937;
       font-weight: 600;
       margin-right: 8px;
+      display: inline-block;
+      min-width: 90px;
     }
     
     .order-items {
       background: #f9fafb;
-      padding: 12px;
-      border-radius: 10px;
-      margin: 8px 0;
-      border-left: 3px solid #6366f1;
+      padding: 14px;
+      border-radius: 12px;
+      margin: 10px 0;
+      border-left: 4px solid #6366f1;
+      font-size: 0.9rem;
     }
     
     .preference-tag {
@@ -80,135 +86,186 @@
       background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
       color: #1e40af;
       padding: 4px 12px;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 0.875rem;
       font-style: italic;
       margin-top: 4px;
+      border: 1px solid #93c5fd;
     }
     
     .status-badge {
       display: inline-block;
-      padding: 6px 14px;
+      padding: 6px 16px;
       border-radius: 12px;
       font-size: 0.875rem;
       font-weight: 600;
       margin-top: 8px;
+      border: 2px solid transparent;
     }
     
     .status-pending {
-      background: #fef3c7;
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
       color: #92400e;
+      border-color: #fcd34d;
     }
     
     .status-started {
-      background: #fed7aa;
+      background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%);
       color: #9a3412;
+      border-color: #fb923c;
     }
     
     .status-ready {
-      background: #d1fae5;
+      background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
       color: #065f46;
+      border-color: #6ee7b7;
     }
     
     .status-collected {
-      background: #dbeafe;
+      background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
       color: #1e40af;
+      border-color: #93c5fd;
     }
     
     .status-cancelled {
-      background: #fee2e2;
+      background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
       color: #991b1b;
+      border-color: #fca5a5;
     }
     
     .action-buttons {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      min-width: 100px;
+      gap: 10px;
+      min-width: 110px;
     }
     
     .action-btn {
-      padding: 8px 16px;
+      padding: 10px 18px;
       border: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 0.875rem;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .action-btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .action-btn:hover::before {
+      width: 300px;
+      height: 300px;
     }
     
     .action-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
     
     .action-btn:active {
-      transform: translateY(0);
+      transform: translateY(-1px);
     }
     
-    /* Soothing button colors */
+    /* Soothing button colors with subtle gradients */
     .startBtn {
       background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
       color: white;
+      border-color: #f59e0b;
     }
     
     .startBtn:hover {
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      border-color: #d97706;
     }
     
     .readyBtn {
       background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
       color: white;
+      border-color: #10b981;
     }
     
     .readyBtn:hover {
       background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      border-color: #059669;
     }
     
     .cancelBtn {
       background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
       color: white;
+      border-color: #ef4444;
     }
     
     .cancelBtn:hover {
       background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      border-color: #dc2626;
     }
     
     .section-header {
       display: flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
+      gap: 16px;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #e5e7eb;
     }
     
     .section-icon {
-      width: 48px;
-      height: 48px;
+      width: 56px;
+      height: 56px;
       background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      border-radius: 12px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
+      font-size: 28px;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+    
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #1f2937 0%, #4b5563 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     
     .empty-state {
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
       background: white;
-      border-radius: 16px;
+      border-radius: 20px;
       border: 2px dashed #e5e7eb;
     }
     
     .empty-state-icon {
-      font-size: 64px;
-      margin-bottom: 16px;
-      opacity: 0.5;
+      font-size: 72px;
+      margin-bottom: 20px;
+      opacity: 0.4;
+    }
+    
+    .empty-state-text {
+      color: #6b7280;
+      font-size: 1.1rem;
     }
   </style>
 </head>
-<body class="bg-gray-50 font-sans">
+<body class="font-sans min-h-screen" style="background: #f5f3ff;">
 
   <!-- Navbar -->
   <nav class="app-nav">
@@ -230,12 +287,12 @@
   <section class="p-6 max-w-6xl mx-auto mt-12">
     <div class="section-header">
       <div class="section-icon">📋</div>
-      <h2 class="text-3xl font-bold text-gray-800">Recent Orders</h2>
+      <h2 class="section-title">Recent Orders</h2>
     </div>
     <div id="ordersList"></div>
   </section>
 
-  <footer class="text-center py-6 text-gray-500 mt-10 border-t border-gray-200">
+  <footer class="text-center py-8 text-gray-500 mt-16 border-t border-gray-200">
     © 2025 Amrita Canteen | Admin Dashboard
   </footer>
 
